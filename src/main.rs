@@ -18,11 +18,10 @@ fn main() {
     let cli = Cli::parse();
     let input = cli.input.as_ref().unwrap();
 
-    if cli.decode {
-        let output = String::from_utf8(base64_url::decode(input).unwrap()).unwrap();
-        println!("{}", output);
+    let output = if cli.decode {
+        String::from_utf8(base64_url::decode(input).unwrap()).unwrap()
     } else {
-        let output = base64_url::encode(input);
-        println!("{}", output);
-    }
+        base64_url::encode(input)
+    };
+    println!("{}", output);
 }
